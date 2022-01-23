@@ -1,0 +1,61 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Owner {
+  id: ID!
+  products: [Product!]!
+  name: String!
+}
+
+type Product {
+  id: ID!
+  name: String!
+  owner: Owner!
+  createdAt: Timestamp!
+}
+
+"""
+`Date` type as integer. Type represents date and time as number of milliseconds from start of UNIX epoch.
+"""
+scalar Timestamp
+
+type Query {
+  products(limit: Int): [Product!]!
+  product(id: Int!): Product!
+  owners(limit: Float = 10): [Owner!]!
+  owner(id: String!): Owner!
+}
+
+type Mutation {
+  createProduct(createProductInput: CreateProductInput!): Product!
+  updateProduct(updateProductInput: UpdateProductInput!): Product!
+  removeProduct(id: Int!): Product!
+  createOwner(createOwnerInput: CreateOwnerInput!): Owner!
+  updateOwner(updateOwnerInput: UpdateOwnerInput!): Owner!
+  removeOwner(id: Int!): Owner!
+}
+
+input CreateProductInput {
+  name: String!
+  owner: ID!
+}
+
+input UpdateProductInput {
+  name: String
+  owner: ID
+  id: Int!
+}
+
+input CreateOwnerInput {
+  name: String!
+}
+
+input UpdateOwnerInput {
+  name: String
+  id: Int!
+}
+
+type Subscription {
+  product(name: String): Product!
+}
